@@ -3,6 +3,7 @@ import type { ReactElement, ReactNode } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import PageLayout from '@/layout/PageLayout';
 import GlobalProvider from '@/providers/GlobalProvider';
+import { CurrencyProvider } from '@/ui-lib/components/currency-context';
 
 interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   initialEntries?: string[];
@@ -42,9 +43,11 @@ function AllTheProviders({ children, route = '/' }: { children: ReactNode; route
   );
 
   return (
-    <GlobalProvider>
-      <RouterProvider router={router} />
-    </GlobalProvider>
+    <CurrencyProvider>
+      <GlobalProvider>
+        <RouterProvider router={router} />
+      </GlobalProvider>
+    </CurrencyProvider>
   );
 }
 

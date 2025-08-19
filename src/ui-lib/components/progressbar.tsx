@@ -1,5 +1,5 @@
 import { Progress as ArkProgress, ark, progressAnatomy } from '@ark-ui/react';
-import { forwardRef } from 'react';
+import { forwardRef, useEffect } from 'react';
 import { type RecipeVariantProps, sva } from 'styled-system/css';
 import { type HTMLStyledProps, styled } from 'styled-system/jsx';
 
@@ -97,7 +97,9 @@ export type ProgressBarProps = HTMLStyledProps<'div'> &
 
 const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>((props, ref) => {
   const { value, size = 'md', color = 'primary', animated = false, showLabel = false, label, ...rest } = props;
-
+  useEffect(() => {
+    console.log(value);
+  }, []);
   const percentage = Math.min(Math.max(value * 100, 0), 100);
   const classes = progressBarRecipe({ size, color, animated });
 

@@ -132,10 +132,10 @@ describe('HomePage Iteration 1 - 과제 구현 검증', () => {
         // 초기 USD 가격 확인
         await waitFor(
           async () => {
-            const initialPrice = await screen.findByText('$10');
-            const convertedPrice = await screen.findByText('13,000원');
-            expect(initialPrice).toBeTruthy();
-            expect(convertedPrice).toBeTruthy();
+            const initialPrice = await screen.findAllByText('$10');
+            const convertedPrice = await screen.findAllByText('13,000원');
+            expect(initialPrice[0]).toBeTruthy();
+            expect(convertedPrice[0]).toBeTruthy();
           },
           { timeout: 3000 }
         );
@@ -184,10 +184,10 @@ describe('HomePage Iteration 1 - 과제 구현 검증', () => {
          */
         await waitFor(
           async () => {
-            const krwPrice = await screen.findByText('16,887원');
+            const krwPrice = await screen.findAllByText('16,887원');
 
             if (krwPrice) {
-              expect(krwPrice).not.match(/\.\d/);
+              expect(krwPrice[0].textContent).not.match(/\.\d/);
             }
           },
           { timeout: 3000 }
@@ -740,11 +740,11 @@ describe('HomePage Iteration 1 - 과제 구현 검증', () => {
          */
         await waitFor(
           async () => {
-            const krwPrice = await screen.findByText('16,887원');
+            const krwPrice = await screen.findAllByText('16,887원');
 
             if (krwPrice) {
-              expect(krwPrice).not.match(/\.\d/);
-              expect(krwPrice).toBeTruthy();
+              expect(krwPrice[0].textContent).not.match(/\.\d/);
+              expect(krwPrice[0]).toBeTruthy();
             }
           },
           { timeout: 3000 }

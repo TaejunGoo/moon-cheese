@@ -82,10 +82,21 @@ export type CurrencyToggleProps = CurrencyToggleVariantProps & {
   defaultValue?: CurrencyType;
   onValueChange?: (value: CurrencyType) => void;
   disabled?: boolean;
+  error?: boolean;
 };
 
-const CurrencyToggle = ({ value, defaultValue = 'USD', onValueChange, disabled = false }: CurrencyToggleProps) => {
+const CurrencyToggle = ({
+  value,
+  defaultValue = 'USD',
+  onValueChange,
+  disabled = false,
+  error = false,
+}: CurrencyToggleProps) => {
   const handleChange = (details: { checked: boolean }) => {
+    if (error) {
+      alert('환율 정보를 불러오지 못했습니다. 다시 시도해 주세요.');
+      return;
+    }
     onValueChange?.(details.checked ? 'KRW' : 'USD');
   };
 
